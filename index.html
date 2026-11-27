@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HNN College of Engineering — Campus Navigator</title>
-  <link rel="stylesheet" href="https://cloudflare.com" />
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -37,17 +36,20 @@
 
       <h3>2. Facility Directory</h3>
       <input type="text" id="search" placeholder="Search CSE lab, library, canteen, ATM..." onkeyup="searchPlace()">
-      <div id="info" class="info">Click any pin on the map or search above to see floor & room details.</div>
+      <div id="info" class="info">Select or search a facility to view floor & Google Maps pin.</div>
     </div>
 
-    <!-- Right Interactive Real Map -->
+    <!-- Right Interactive Google Map Embed -->
     <div class="box">
-      <h3>Interactive Campus Map <small>(Zoom, Drag, or Click Pins)</small></h3>
-      <div id="map" style="width:100%; height:540px; border-radius:8px; border:1px solid #cbd5e1;"></div>
+      <h3>Interactive Campus Map <small>(Zoom, Drag, Satellite & Recenter)</small></h3>
+      <iframe id="gmapFrame"
+        src="https://google.com"
+        width="100%" height="540" style="border:1px solid #cbd5e1; border-radius:8px;"
+        allowfullscreen="" loading="lazy">
+      </iframe>
     </div>
   </div>
 
-  <script src="https://cloudflare.com"></script>
   <script src="script.js"></script>
 </body>
 </html>
