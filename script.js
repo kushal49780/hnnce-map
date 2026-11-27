@@ -188,4 +188,8 @@ function searchPlace() {
 }
 
 // Load campus map automatically on page open
+function recenterCampus() {
+  focusMap(12.92485, 77.57845);
+  document.getElementById("output").innerHTML = "Map recentered to HNN College of Engineering.";
+}
 recenterCampus();
