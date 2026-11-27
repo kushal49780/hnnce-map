@@ -1,50 +1,64 @@
-// 1. Campus Nodes: [0: Name, 1: Floor/Zone, 2: Latitude, 3: Longitude, 4: Details]
+// 1. Campus Nodes: Name, Floor/Zone, Latitude, Longitude, Details
 const nodes = {
-  MAIN_GATE:    ["Main Gate (Front Entrance)", "Primary Entry for All", 12.92536, 77.57885, "Primary Front Entrance Gate for all students, staff, and visitors."],
-  CANTEEN:      ["College Canteen", "Behind Main (Left)", 12.92530, 77.57902, "Behind Main Block, on the Left of Canteen Gate. Open 8 AM - 6 PM."],
-  CANTEEN_GATE: ["Canteen Gate", "Behind Main Block", 12.92528, 77.57908, "Gate behind Engineering Main Block (Canteen on Left, ATM on Right)."],
-  ATM:          ["Campus ATM", "Behind Main (Right)", 12.92526, 77.57914, "Behind Main Block, on the Right of Canteen Gate. Open 24/7."],
+  MAIN_GATE:    { name: "Main Gate (Front Entrance)", floor: "Primary Entry for All", lat: 12.92536, lng: 77.57885, desc: "Primary Front Entrance Gate for all students, staff, and visitors." },
+  CANTEEN:      { name: "College Canteen", floor: "Behind Main (Left)", lat: 12.92530, lng: 77.57902, desc: "Behind Main Block, on the Left of Canteen Gate. Open 8 AM - 6 PM." },
+  CANTEEN_GATE: { name: "Canteen Gate", floor: "Behind Main Block", lat: 12.92528, lng: 77.57908, desc: "Gate behind Engineering Main Block (Canteen on Left, ATM on Right)." },
+  ATM:          { name: "Campus ATM", floor: "Behind Main (Right)", lat: 12.92526, lng: 77.57914, desc: "Behind Main Block, on the Right of Canteen Gate. Open 24/7." },
 
-  B_PHYSICS:    ["Physics Lab", "Basement (-1)", 12.92541, 77.57894, "Engineering Physics Lab in Main Building Basement."],
-  B_CLASS:      ["Basement Classrooms", "Basement (-1)", 12.92542, 77.57897, "Lecture classrooms in the Basement."],
-  B_LIBRARY:    ["Central Library", "Basement (-1)", 12.92543, 77.57900, "Main Library, reading room & VTU digital journals in Basement."],
+  B_PHYSICS:    { name: "Physics Lab", floor: "Basement (-1)", lat: 12.92541, lng: 77.57894, desc: "Engineering Physics Lab in Main Building Basement." },
+  B_CLASS:      { name: "Basement Classrooms", floor: "Basement (-1)", lat: 12.92542, lng: 77.57897, desc: "Lecture classrooms in the Basement." },
+  B_LIBRARY:    { name: "Central Library", floor: "Basement (-1)", lat: 12.92543, lng: 77.57900, desc: "Main Library, reading room & VTU digital journals in Basement." },
 
-  G_OFFICE:     ["Admin Office (Left)", "Ground Floor", 12.92544, 77.57893, "Ground Floor Left: Principal Office, Admissions, Accounts & Exam Cell."],
-  G_WASHROOM:   ["Ground Washroom", "Ground Floor", 12.92545, 77.57896, "Washroom facility on the Ground Floor."],
-  G_MULTIMEDIA: ["Multimedia Hall (Right)", "Ground Floor", 12.92546, 77.57899, "Ground Floor Right: A/C Multimedia Seminar Hall."],
+  G_OFFICE:     { name: "Admin Office (Left)", floor: "Ground Floor", lat: 12.92544, lng: 77.57893, desc: "Ground Floor Left: Principal Office, Admissions, Accounts & Exam Cell." },
+  G_WASHROOM:   { name: "Ground Washroom", floor: "Ground Floor", lat: 12.92545, lng: 77.57896, desc: "Washroom facility on the Ground Floor." },
+  G_MULTIMEDIA: { name: "Multimedia Hall (Right)", floor: "Ground Floor", lat: 12.92546, lng: 77.57899, desc: "Ground Floor Right: A/C Multimedia Seminar Hall." },
 
-  F1_CHEM:      ["Chemistry Lab", "1st Floor", 12.92547, 77.57894, "Engineering Chemistry Lab on the 1st Floor."],
-  F1_CSE:       ["Computer Science Lab", "1st Floor", 12.92548, 77.57897, "CSE Programming & Data Structures Lab on the 1st Floor."],
-  F1_STAFF:     ["1st Floor Staff & WR", "1st Floor", 12.92549, 77.57900, "1st Floor Faculty Staffroom and Washroom."],
+  F1_CHEM:      { name: "Chemistry Lab", floor: "1st Floor", lat: 12.92547, lng: 77.57894, desc: "Engineering Chemistry Lab on the 1st Floor." },
+  F1_CSE:       { name: "Computer Science Lab", floor: "1st Floor", lat: 12.92548, lng: 77.57897, desc: "CSE Programming & Data Structures Lab on the 1st Floor." },
+  F1_STAFF:     { name: "1st Floor Staff & WR", floor: "1st Floor", lat: 12.92549, lng: 77.57900, desc: "1st Floor Faculty Staffroom and Washroom." },
 
-  F2_CLASS:     ["2nd Floor Classrooms", "2nd Floor", 12.92550, 77.57895, "Engineering lecture classrooms on the 2nd Floor."],
-  F2_STAFF:     ["2nd Floor Staff & WR", "2nd Floor", 12.92551, 77.57899, "2nd Floor Faculty Staffroom and Washroom."],
-  F3_TERRACE:   ["3rd Floor Terrace", "3rd Floor (Top)", 12.92552, 77.57897, "Open Terrace on the 3rd Floor of Main Building."],
+  F2_CLASS:     { name: "2nd Floor Classrooms", floor: "2nd Floor", lat: 12.92550, lng: 77.57895, desc: "Engineering lecture classrooms on the 2nd Floor." },
+  F2_STAFF:     { name: "2nd Floor Staff & WR", floor: "2nd Floor", lat: 12.92551, lng: 77.57899, desc: "2nd Floor Faculty Staffroom and Washroom." },
+  F3_TERRACE:   { name: "3rd Floor Terrace", floor: "3rd Floor (Top)", lat: 12.92552, lng: 77.57897, desc: "Open Terrace on the 3rd Floor of Main Building." },
 
-  BACK_GATE:    ["Back Gate (Rear)", "Rear Access", 12.92578, 77.57902, "Rear gate opening directly in front of the MCA Block."],
-  MCA_BLOCK:    ["MCA Block (3rd Sem/Lab)", "In Front of Back Gate", 12.92568, 77.57900, "3rd Sem classrooms (Right & Left), Staffroom (Left) & MCA Computer Lab."],
-  SPORTS_ROOM:  ["Sports Room & WR", "Below MCA Block", 12.92564, 77.57902, "Located below MCA Block: Sports equipment room and washrooms."],
-  GROUND:       ["College Ground", "Right of Campus", 12.925572, 77.579086, "Spacious outdoor College Ground on the right side of the campus."],
-  DEGREE_BLOCK: ["Degree Block (Left)", "Past MCA (Left)", 12.92548, 77.57914, "Walk a few steps past MCA Block — Degree Block is on the Left."],
-  PUC_BLOCK:    ["PUC Block (Right)", "Past MCA (Right)", 12.92546, 77.57925, "Walk a few steps past MCA Block — PUC Block is on the Right."]
+  BACK_GATE:    { name: "Back Gate (Rear)", floor: "Rear Access", lat: 12.92578, lng: 77.57902, desc: "Rear gate opening directly in front of the MCA Block." },
+  MCA_BLOCK:    { name: "MCA Block (3rd Sem/Lab)", floor: "In Front of Back Gate", lat: 12.92568, lng: 77.57900, desc: "3rd Sem classrooms (Right & Left), Staffroom (Left) & MCA Computer Lab." },
+  SPORTS_ROOM:  { name: "Sports Room & WR", floor: "Below MCA Block", lat: 12.92564, lng: 77.57902, desc: "Located below MCA Block: Sports equipment room and washrooms." },
+  GROUND:       { name: "College Ground", floor: "Right of Campus", lat: 12.925572, lng: 77.579086, desc: "Spacious outdoor College Ground on the right side of the campus." },
+  DEGREE_BLOCK: { name: "Degree Block (Left)", floor: "Past MCA (Left)", lat: 12.92548, lng: 77.57914, desc: "Walk a few steps past MCA Block — Degree Block is on the Left." },
+  PUC_BLOCK:    { name: "PUC Block (Right)", floor: "Past MCA (Right)", lat: 12.92546, lng: 77.57925, desc: "Walk a few steps past MCA Block — PUC Block is on the Right." }
 };
 
-// 2. Campus Connections: [From, To, Meters, Flat/LiftAccessible]
+// 2. Campus Connections
 const edges = [
-  ["MAIN_GATE", "G_OFFICE", 20, true], ["CANTEEN_GATE", "CANTEEN", 15, true],
-  ["CANTEEN_GATE", "ATM", 15, true], ["B_LIBRARY", "CANTEEN_GATE", 20, true],
-  ["G_OFFICE", "G_WASHROOM", 18, true], ["G_WASHROOM", "G_MULTIMEDIA", 18, true],
-  ["G_OFFICE", "B_PHYSICS", 20, true], ["B_PHYSICS", "B_CLASS", 18, true],
-  ["B_CLASS", "B_LIBRARY", 18, true], ["G_MULTIMEDIA", "B_LIBRARY", 20, false],
-  ["G_OFFICE", "F1_CHEM", 20, true], ["F1_CHEM", "F1_CSE", 18, true],
-  ["F1_CSE", "F1_STAFF", 18, true], ["G_MULTIMEDIA", "F1_STAFF", 20, false],
-  ["F1_CHEM", "F2_CLASS", 20, true], ["F2_CLASS", "F2_STAFF", 22, true],
-  ["F1_STAFF", "F2_STAFF", 20, false], ["F2_CLASS", "F3_TERRACE", 20, false],
-  ["F2_STAFF", "F3_TERRACE", 20, false], ["G_MULTIMEDIA", "MCA_BLOCK", 45, true],
-  ["CANTEEN_GATE", "DEGREE_BLOCK", 40, true], ["BACK_GATE", "MCA_BLOCK", 20, true],
-  ["BACK_GATE", "GROUND", 40, true], ["MCA_BLOCK", "SPORTS_ROOM", 15, false],
-  ["MCA_BLOCK", "GROUND", 35, true], ["SPORTS_ROOM", "DEGREE_BLOCK", 30, true],
-  ["SPORTS_ROOM", "PUC_BLOCK", 35, true], ["DEGREE_BLOCK", "PUC_BLOCK", 25, true]
+  { u: "MAIN_GATE", v: "G_OFFICE", w: 20, flat: true },
+  { u: "CANTEEN_GATE", v: "CANTEEN", w: 15, flat: true },
+  { u: "CANTEEN_GATE", v: "ATM", w: 15, flat: true },
+  { u: "B_LIBRARY", v: "CANTEEN_GATE", w: 20, flat: true },
+  { u: "G_OFFICE", v: "G_WASHROOM", w: 18, flat: true },
+  { u: "G_WASHROOM", v: "G_MULTIMEDIA", w: 18, flat: true },
+  { u: "G_OFFICE", v: "B_PHYSICS", w: 20, flat: true },
+  { u: "B_PHYSICS", v: "B_CLASS", w: 18, flat: true },
+  { u: "B_CLASS", v: "B_LIBRARY", w: 18, flat: true },
+  { u: "G_MULTIMEDIA", v: "B_LIBRARY", w: 20, flat: false },
+  { u: "G_OFFICE", v: "F1_CHEM", w: 20, flat: true },
+  { u: "F1_CHEM", v: "F1_CSE", w: 18, flat: true },
+  { u: "F1_CSE", v: "F1_STAFF", w: 18, flat: true },
+  { u: "G_MULTIMEDIA", v: "F1_STAFF", w: 20, flat: false },
+  { u: "F1_CHEM", v: "F2_CLASS", w: 20, flat: true },
+  { u: "F2_CLASS", v: "F2_STAFF", w: 22, flat: true },
+  { u: "F1_STAFF", v: "F2_STAFF", w: 20, flat: false },
+  { u: "F2_CLASS", v: "F3_TERRACE", w: 20, flat: false },
+  { u: "F2_STAFF", v: "F3_TERRACE", w: 20, flat: false },
+  { u: "G_MULTIMEDIA", v: "MCA_BLOCK", w: 45, flat: true },
+  { u: "CANTEEN_GATE", v: "DEGREE_BLOCK", w: 40, flat: true },
+  { u: "BACK_GATE", v: "MCA_BLOCK", w: 20, flat: true },
+  { u: "BACK_GATE", v: "GROUND", w: 40, flat: true },
+  { u: "MCA_BLOCK", v: "SPORTS_ROOM", w: 15, flat: false },
+  { u: "MCA_BLOCK", v: "GROUND", w: 35, flat: true },
+  { u: "SPORTS_ROOM", v: "DEGREE_BLOCK", w: 30, flat: true },
+  { u: "SPORTS_ROOM", v: "PUC_BLOCK", w: 35, flat: true },
+  { u: "DEGREE_BLOCK", v: "PUC_BLOCK", w: 25, flat: true }
 ];
 
 // 3. Initialize Interactive Map at HNN College of Engineering
@@ -72,25 +86,22 @@ let userMarker = null;
 
 for (let id in nodes) {
   connections[id] = [];
-  let name = nodes[id][0];
-  let floor = nodes[id][1];
-  let lat = nodes[id][2];
-  let lng = nodes[id][3];
-  let desc = nodes[id][4];
+  let item = nodes[id];
 
-  startSel.add(new Option(`${name} (${floor})`, id));
-  endSel.add(new Option(`${name} (${floor})`, id));
+  startSel.add(new Option(item.name + " (" + item.floor + ")", id));
+  endSel.add(new Option(item.name + " (" + item.floor + ")", id));
 
-  const marker = L.marker([lat, lng]).addTo(map);
-  marker.bindPopup(`<b>${name}</b><br><i>${floor}</i><br>${desc}`);
-  marker.on("click", () => showInfo(id));
+  const marker = L.marker([item.lat, item.lng]).addTo(map);
+  marker.bindPopup("<b>" + item.name + "</b><br><i>" + item.floor + "</i><br>" + item.desc);
+  marker.on("click", function() { showInfo(id); });
 }
 endSel.value = "F1_CSE";
 
-edges.forEach(([u, v, w, flat]) => {
-  connections[u].push({ to: v, w, flat });
-  connections[v].push({ to: u, w, flat });
-});
+for (let i = 0; i < edges.length; i++) {
+  let e = edges[i];
+  connections[e.u].push({ to: e.v, w: e.w, flat: e.flat });
+  connections[e.v].push({ to: e.u, w: e.w, flat: e.flat });
+}
 
 // 5. Queue-Based Route Finder + Red Polyline on Map
 function findRoute() {
@@ -102,43 +113,50 @@ function findRoute() {
   if (routeLine) map.removeLayer(routeLine);
 
   if (start === end) {
-    out.innerHTML = `You are already at <b>${nodes[start][0]}</b>.`;
-    map.setView([nodes[start][2], nodes[start][3]], 20);
+    out.innerHTML = "You are already at <b>" + nodes[start].name + "</b>.";
+    map.setView([nodes[start].lat, nodes[start].lng], 20);
     return;
   }
 
-  const queue = [[start, [start], 0]];
+  const queue = [{ curr: start, path: [start], totalDist: 0 }];
   const visited = [start];
 
   while (queue.length > 0) {
-    let [curr, path, totalDist] = queue.shift();
+    let step = queue.shift();
 
-    if (curr === end) {
-      let distText = totalDist >= 1000 ? (totalDist / 1000).toFixed(2) + " km" : totalDist + " m";
-      let mins = Math.max(1, Math.ceil(totalDist / 60));
+    if (step.curr === end) {
+      let distText = step.totalDist >= 1000 ? (step.totalDist / 1000).toFixed(2) + " km" : step.totalDist + " m";
+      let mins = Math.max(1, Math.ceil(step.totalDist / 60));
 
-      let html = `<b>Distance:</b> ${distText} (~${mins} min walk)<br><b>Step-by-Step Route:</b><br>`;
+      let html = "<b>Distance:</b> " + distText + " (~" + mins + " min walk)<br><b>Step-by-Step Route:</b><br>";
       const latLngs = [];
 
-      path.forEach((id, i) => {
-        html += `${i + 1}. ${nodes[id][0]} <i>(${nodes[id][1]})</i><br>`;
-        latLngs.push([nodes[id][2], nodes[id][3]]);
-      });
+      for (let i = 0; i < step.path.length; i++) {
+        let id = step.path[i];
+        html += (i + 1) + ". " + nodes[id].name + " <i>(" + nodes[id].floor + ")</i><br>";
+        latLngs.push([nodes[id].lat, nodes[id].lng]);
+      }
 
       out.innerHTML = html;
 
       routeLine = L.polyline(latLngs, { color: "#dc2626", weight: 6, opacity: 0.9 }).addTo(map);
-      map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
+      map.fitBounds(routeLine.getBounds());
       return;
     }
 
-    connections[curr].forEach(edge => {
-      if (noStairs && !edge.flat) return;
+    let neighbors = connections[step.curr];
+    for (let i = 0; i < neighbors.length; i++) {
+      let edge = neighbors[i];
+      if (noStairs && !edge.flat) continue;
       if (visited.indexOf(edge.to) === -1) {
         visited.push(edge.to);
-        queue.push([edge.to, [...path, edge.to], totalDist + edge.w]);
+        queue.push({
+          curr: edge.to,
+          path: step.path.concat([edge.to]),
+          totalDist: step.totalDist + edge.w
+        });
       }
-    });
+    }
   }
 
   out.innerHTML = "No lift/flat-only route available for this destination.";
@@ -151,15 +169,18 @@ function locateUser() {
     return;
   }
   navigator.geolocation.getCurrentPosition(
-    (pos) => {
-      const { latitude, longitude } = pos.coords;
+    function(pos) {
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
       if (userMarker) map.removeLayer(userMarker);
-      userMarker = L.circleMarker([latitude, longitude], {
+      userMarker = L.circleMarker([lat, lng], {
         radius: 9, fillColor: "#2563eb", color: "#ffffff", weight: 3, fillOpacity: 1
       }).addTo(map).bindPopup("<b>You are here (Live GPS)</b>").openPopup();
-      map.setView([latitude, longitude], 19);
+      map.setView([lat, lng], 19);
     },
-    () => alert("Please allow Location access in your browser to show your live GPS dot.")
+    function() {
+      alert("Please allow Location access in your browser to show your live GPS dot.");
+    }
   );
 }
 
@@ -170,19 +191,10 @@ function recenterCampus() {
 }
 
 function showInfo(id) {
-  const [name, floor, lat, lng, desc] = nodes[id];
+  const item = nodes[id];
   document.getElementById("info").innerHTML =
-    `<b>${name}</b> (${floor})<br>${desc}<br><small><b>GPS:</b> ${lat}, ${lng}</small>`;
+    "<b>" + item.name + "</b> (" + item.floor + ")<br>" + item.desc +
+    "<br><small><b>GPS:</b> " + item.lat + ", " + item.lng + "</small>";
 }
 
 function searchPlace() {
-  const q = document.getElementById("search").value.toLowerCase();
-  if (!q) return;
-  for (let id in nodes) {
-    if (nodes[id][0].toLowerCase().includes(q) || nodes[id][1].toLowerCase().includes(q) || nodes[id][4].toLowerCase().includes(q)) {
-      showInfo(id);
-      map.setView([nodes[id][2], nodes[id][3]], 20);
-      break;
-    }
-  }
-}
