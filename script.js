@@ -61,39 +61,17 @@ const edges = [
   { u: "DEGREE_BLOCK", v: "PUC_BLOCK", w: 25, flat: true }
 ];
 
-// 3. Initialize Interactive Map at HNN College of Engineering
-const campusCenter = [12.92552, 77.57903];
-const map = L.map("map").setView(campusCenter, 19);
-
-const streetLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 21,
-  attribution: "© OpenStreetMap"
-}).addTo(map);
-
-const satelliteLayer = L.tileLayer("https://arcgisonline.com{z}/{y}/{x}", {
-  maxZoom: 21,
-  attribution: "© Esri Satellite"
-});
-
-L.control.layers({ "Street Map": streetLayer, "Satellite View": satelliteLayer }).addTo(map);
-
-// 4. Build Connections, Dropdowns & Map Pins
+// 3. Build Connections & Populate Dropdowns immediately
 const connections = {};
 const startSel = document.getElementById("start");
 const endSel = document.getElementById("end");
-let routeLine = null;
-let userMarker = null;
+const mapFrame = document.getElementById("gmapFrame");
 
 for (let id in nodes) {
   connections[id] = [];
   let item = nodes[id];
-
   startSel.add(new Option(item.name + " (" + item.floor + ")", id));
   endSel.add(new Option(item.name + " (" + item.floor + ")", id));
-
-  const marker = L.marker([item.lat, item.lng]).addTo(map);
-  marker.bindPopup("<b>" + item.name + "</b><br><i>" + item.floor + "</i><br>" + item.desc);
-  marker.on("click", function() { showInfo(id); });
 }
 endSel.value = "F1_CSE";
 
@@ -103,18 +81,16 @@ for (let i = 0; i < edges.length; i++) {
   connections[e.v].push({ to: e.u, w: e.w, flat: e.flat });
 }
 
-// 5. Queue-Based Route Finder + Red Polyline on Map
+// 4. Queue-Based Route Finder + Focus Google Map on Destination
 function findRoute() {
   const start = startSel.value;
   const end = endSel.value;
   const noStairs = document.getElementById("noStairs").checked;
   const out = document.getElementById("output");
 
-  if (routeLine) map.removeLayer(routeLine);
-
   if (start === end) {
     out.innerHTML = "You are already at <b>" + nodes[start].name + "</b>.";
-    map.setView([nodes[start].lat, nodes[start].lng], 20);
+    focusMap(nodes[start].lat, nodes[start].lng);
     return;
   }
 
@@ -129,18 +105,14 @@ function findRoute() {
       let mins = Math.max(1, Math.ceil(step.totalDist / 60));
 
       let html = "<b>Distance:</b> " + distText + " (~" + mins + " min walk)<br><b>Step-by-Step Route:</b><br>";
-      const latLngs = [];
-
       for (let i = 0; i < step.path.length; i++) {
         let id = step.path[i];
         html += (i + 1) + ". " + nodes[id].name + " <i>(" + nodes[id].floor + ")</i><br>";
-        latLngs.push([nodes[id].lat, nodes[id].lng]);
       }
 
       out.innerHTML = html;
-
-      routeLine = L.polyline(latLngs, { color: "#dc2626", weight: 6, opacity: 0.9 }).addTo(map);
-      map.fitBounds(routeLine.getBounds());
+      showInfo(end);
+      focusMap(nodes[end].lat, nodes[end].lng);
       return;
     }
 
@@ -162,7 +134,10 @@ function findRoute() {
   out.innerHTML = "No lift/flat-only route available for this destination.";
 }
 
-// 6. Live Phone GPS Blue Dot & Recenter Functions
+function focusMap(lat, lng) {
+  mapFrame.src = "https://google.com" + lat + "," + lng + "&t=k&z=20&output=embed";
+}
+
 function locateUser() {
   if (!navigator.geolocation) {
     alert("GPS is not supported by your browser.");
@@ -170,23 +145,17 @@ function locateUser() {
   }
   navigator.geolocation.getCurrentPosition(
     function(pos) {
-      const lat = pos.coords.latitude;
-      const lng = pos.coords.longitude;
-      if (userMarker) map.removeLayer(userMarker);
-      userMarker = L.circleMarker([lat, lng], {
-        radius: 9, fillColor: "#2563eb", color: "#ffffff", weight: 3, fillOpacity: 1
-      }).addTo(map).bindPopup("<b>You are here (Live GPS)</b>").openPopup();
-      map.setView([lat, lng], 19);
+      focusMap(pos.coords.latitude, pos.coords.longitude);
+      document.getElementById("output").innerHTML = "Centered map on your <b>Live GPS Location</b>.";
     },
     function() {
-      alert("Please allow Location access in your browser to show your live GPS dot.");
+      alert("Please allow Location access in your browser to center on your live GPS.");
     }
   );
 }
 
 function recenterCampus() {
-  if (routeLine) map.removeLayer(routeLine);
-  map.setView(campusCenter, 19);
+  mapFrame.src = "https://google.com12.925572,77.579086&t=k&z=19&output=embed";
   document.getElementById("output").innerHTML = "Map recentered to HNN College of Engineering Campus.";
 }
 
@@ -198,3 +167,16 @@ function showInfo(id) {
 }
 
 function searchPlace() {
+  const q = document.getElementById("search").value.toLowerCase();
+  if (!q) return;
+  for (let id in nodes) {
+    let item = nodes[id];
+    if (item.name.toLowerCase().indexOf(q) !== -1 ||
+        item.floor.toLowerCase().indexOf(q) !== -1 ||
+        item.desc.toLowerCase().indexOf(q) !== -1) {
+      showInfo(id);
+      focusMap(item.lat, item.lng);
+      break;
+    }
+  }
+}
