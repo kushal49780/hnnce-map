@@ -61,7 +61,7 @@ const edges = [
   { u: "DEGREE_BLOCK", v: "PUC_BLOCK", w: 25, flat: true }
 ];
 
-// 3. Build Connections & Populate Dropdowns immediately
+// 3. Build Connections & Populate Dropdowns
 const connections = {};
 const startSel = document.getElementById("start");
 const endSel = document.getElementById("end");
@@ -81,7 +81,7 @@ for (let i = 0; i < edges.length; i++) {
   connections[e.v].push({ to: e.u, w: e.w, flat: e.flat });
 }
 
-// 4. Queue-Based Route Finder + Focus Google Map on Destination
+// 4. Queue-Based Route Finder (3rd Sem Data Structures - FIFO Queue)
 function findRoute() {
   const start = startSel.value;
   const end = endSel.value;
@@ -134,11 +134,14 @@ function findRoute() {
   out.innerHTML = "No lift/flat-only route available for this destination.";
 }
 
+// 5. Load OpenStreetMap Embed Safely
 function focusMap(lat, lng) {
   let d = 0.0008;
-  mapFrame.src = "https://openstreetmap.org" +
-    (lng - d) + "%2C" + (lat - d) + "%2C" + (lng + d) + "%2C" + (lat + d) +
-    "&layer=mapnik&marker=" + lat + "%2C" + lng;
+  let base = "https://openstreetmap.org";
+  let path = "/export/embed.html?bbox=";
+  let coords = (lng - d) + "," + (lat - d) + "," + (lng + d) + "," + (lat + d);
+  let pin = "&layer=mapnik&marker=" + lat + "," + lng;
+  mapFrame.src = base + path + coords + pin;
 }
 
 function locateUser() {
@@ -161,6 +164,7 @@ function recenterCampus() {
   focusMap(12.925572, 77.579086);
   document.getElementById("output").innerHTML = "Map recentered to HNN College of Engineering Campus.";
 }
+
 function showInfo(id) {
   const item = nodes[id];
   document.getElementById("info").innerHTML =
@@ -182,3 +186,6 @@ function searchPlace() {
     }
   }
 }
+
+// Load campus map automatically on page open
+recenterCampus();
