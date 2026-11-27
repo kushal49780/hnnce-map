@@ -128,7 +128,7 @@ function findRoute() {
       out.innerHTML = html;
 
       routeLine = L.polyline(latLngs, { color: "#dc2626", weight: 6, opacity: 0.9 }).addTo(map);
-      map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
+      map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
       return;
     }
 
