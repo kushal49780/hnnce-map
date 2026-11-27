@@ -1,32 +1,32 @@
 // 1. Campus Nodes: Name, Floor/Zone, Latitude, Longitude, Details
 const nodes = {
-  MAIN_GATE:    { name: "Main Gate (Front Entrance)", floor: "Primary Entry for All", lat: 12.92536, lng: 77.57885, desc: "Primary Front Entrance Gate for all students, staff, and visitors." },
-  CANTEEN:      { name: "College Canteen", floor: "Behind Main (Left)", lat: 12.92530, lng: 77.57902, desc: "Behind Main Block, on the Left of Canteen Gate. Open 8 AM - 6 PM." },
-  CANTEEN_GATE: { name: "Canteen Gate", floor: "Behind Main Block", lat: 12.92528, lng: 77.57908, desc: "Gate behind Engineering Main Block (Canteen on Left, ATM on Right)." },
-  ATM:          { name: "Campus ATM", floor: "Behind Main (Right)", lat: 12.92526, lng: 77.57914, desc: "Behind Main Block, on the Right of Canteen Gate. Open 24/7." },
+  MAIN_GATE:    { name: "Main Gate (Front Entrance)", floor: "Primary Entry for All", lat: 12.92480, lng: 77.57825, desc: "Primary Front Entrance Gate for all students, staff, and visitors." },
+  CANTEEN:      { name: "College Canteen", floor: "Behind Main (Left)", lat: 12.92475, lng: 77.57855, desc: "Behind Main Block, on the Left of Canteen Gate. Open 8 AM - 6 PM." },
+  CANTEEN_GATE: { name: "Canteen Gate", floor: "Behind Main Block", lat: 12.92472, lng: 77.57862, desc: "Gate behind Engineering Main Block (Canteen on Left, ATM on Right)." },
+  ATM:          { name: "Campus ATM", floor: "Behind Main (Right)", lat: 12.92470, lng: 77.57868, desc: "Behind Main Block, on the Right of Canteen Gate. Open 24/7." },
 
-  B_PHYSICS:    { name: "Physics Lab", floor: "Basement (-1)", lat: 12.92541, lng: 77.57894, desc: "Engineering Physics Lab in Main Building Basement." },
-  B_CLASS:      { name: "Basement Classrooms", floor: "Basement (-1)", lat: 12.92542, lng: 77.57897, desc: "Lecture classrooms in the Basement." },
-  B_LIBRARY:    { name: "Central Library", floor: "Basement (-1)", lat: 12.92543, lng: 77.57900, desc: "Main Library, reading room & VTU digital journals in Basement." },
+  B_PHYSICS:    { name: "Physics Lab", floor: "Basement (-1)", lat: 12.92485, lng: 77.57843, desc: "Engineering Physics Lab in Main Building Basement." },
+  B_CLASS:      { name: "Basement Classrooms", floor: "Basement (-1)", lat: 12.92485, lng: 77.57845, desc: "Lecture classrooms in the Basement." },
+  B_LIBRARY:    { name: "Central Library", floor: "Basement (-1)", lat: 12.92485, lng: 77.57847, desc: "Main Library, reading room & VTU digital journals in Basement." },
 
-  G_OFFICE:     { name: "Admin Office (Left)", floor: "Ground Floor", lat: 12.92544, lng: 77.57893, desc: "Ground Floor Left: Principal Office, Admissions, Accounts & Exam Cell." },
-  G_WASHROOM:   { name: "Ground Washroom", floor: "Ground Floor", lat: 12.92545, lng: 77.57896, desc: "Washroom facility on the Ground Floor." },
-  G_MULTIMEDIA: { name: "Multimedia Hall (Right)", floor: "Ground Floor", lat: 12.92546, lng: 77.57899, desc: "Ground Floor Right: A/C Multimedia Seminar Hall." },
+  G_OFFICE:     { name: "Admin Office (Left)", floor: "Ground Floor", lat: 12.92485, lng: 77.57843, desc: "Ground Floor Left: Principal Office, Admissions, Accounts & Exam Cell." },
+  G_WASHROOM:   { name: "Ground Washroom", floor: "Ground Floor", lat: 12.92485, lng: 77.57845, desc: "Washroom facility on the Ground Floor." },
+  G_MULTIMEDIA: { name: "Multimedia Hall (Right)", floor: "Ground Floor", lat: 12.92485, lng: 77.57847, desc: "Ground Floor Right: A/C Multimedia Seminar Hall." },
 
-  F1_CHEM:      { name: "Chemistry Lab", floor: "1st Floor", lat: 12.92547, lng: 77.57894, desc: "Engineering Chemistry Lab on the 1st Floor." },
-  F1_CSE:       { name: "Computer Science Lab", floor: "1st Floor", lat: 12.92548, lng: 77.57897, desc: "CSE Programming & Data Structures Lab on the 1st Floor." },
-  F1_STAFF:     { name: "1st Floor Staff & WR", floor: "1st Floor", lat: 12.92549, lng: 77.57900, desc: "1st Floor Faculty Staffroom and Washroom." },
+  F1_CHEM:      { name: "Chemistry Lab", floor: "1st Floor", lat: 12.92485, lng: 77.57843, desc: "Engineering Chemistry Lab on the 1st Floor." },
+  F1_CSE:       { name: "Computer Science Lab", floor: "1st Floor", lat: 12.92485, lng: 77.57845, desc: "CSE Programming & Data Structures Lab on the 1st Floor." },
+  F1_STAFF:     { name: "1st Floor Staff & WR", floor: "1st Floor", lat: 12.92485, lng: 77.57847, desc: "1st Floor Faculty Staffroom and Washroom." },
 
-  F2_CLASS:     { name: "2nd Floor Classrooms", floor: "2nd Floor", lat: 12.92550, lng: 77.57895, desc: "Engineering lecture classrooms on the 2nd Floor." },
-  F2_STAFF:     { name: "2nd Floor Staff & WR", floor: "2nd Floor", lat: 12.92551, lng: 77.57899, desc: "2nd Floor Faculty Staffroom and Washroom." },
-  F3_TERRACE:   { name: "3rd Floor Terrace", floor: "3rd Floor (Top)", lat: 12.92552, lng: 77.57897, desc: "Open Terrace on the 3rd Floor of Main Building." },
+  F2_CLASS:     { name: "2nd Floor Classrooms", floor: "2nd Floor", lat: 12.92485, lng: 77.57844, desc: "Engineering lecture classrooms on the 2nd Floor." },
+  F2_STAFF:     { name: "2nd Floor Staff & WR", floor: "2nd Floor", lat: 12.92485, lng: 77.57846, desc: "2nd Floor Faculty Staffroom and Washroom." },
+  F3_TERRACE:   { name: "3rd Floor Terrace", floor: "3rd Floor (Top)", lat: 12.92485, lng: 77.57845, desc: "Open Terrace on the 3rd Floor of Main Building." },
 
   BACK_GATE:    { name: "Back Gate (Rear)", floor: "Rear Access", lat: 12.92578, lng: 77.57902, desc: "Rear gate opening directly in front of the MCA Block." },
-  MCA_BLOCK:    { name: "MCA Block (3rd Sem/Lab)", floor: "In Front of Back Gate", lat: 12.92568, lng: 77.57900, desc: "3rd Sem classrooms (Right & Left), Staffroom (Left) & MCA Computer Lab." },
-  SPORTS_ROOM:  { name: "Sports Room & WR", floor: "Below MCA Block", lat: 12.92564, lng: 77.57902, desc: "Located below MCA Block: Sports equipment room and washrooms." },
+  MCA_BLOCK:    { name: "MCA Block (3rd Sem/Lab)", floor: "In Front of Back Gate", lat: 12.92555, lng: 77.57865, desc: "3rd Sem classrooms (Right & Left), Staffroom (Left) & MCA Computer Lab." },
+  SPORTS_ROOM:  { name: "Sports Room & WR", floor: "Below MCA Block", lat: 12.92545, lng: 77.57865, desc: "Located below MCA Block: Sports equipment room and washrooms." },
   GROUND:       { name: "College Ground", floor: "Right of Campus", lat: 12.925572, lng: 77.579086, desc: "Spacious outdoor College Ground on the right side of the campus." },
-  DEGREE_BLOCK: { name: "Degree Block (Left)", floor: "Past MCA (Left)", lat: 12.92548, lng: 77.57914, desc: "Walk a few steps past MCA Block — Degree Block is on the Left." },
-  PUC_BLOCK:    { name: "PUC Block (Right)", floor: "Past MCA (Right)", lat: 12.92546, lng: 77.57925, desc: "Walk a few steps past MCA Block — PUC Block is on the Right." }
+  DEGREE_BLOCK: { name: "Degree Block (Left)", floor: "Past MCA (Left)", lat: 12.92485, lng: 77.57895, desc: "Walk a few steps past MCA Block — Degree Block is on the Left." },
+  PUC_BLOCK:    { name: "PUC Block (Right)", floor: "Past MCA (Right)", lat: 12.92485, lng: 77.57925, desc: "Walk a few steps past MCA Block — PUC Block is on the Right." }
 };
 
 // 2. Campus Connections
