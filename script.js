@@ -135,7 +135,10 @@ function findRoute() {
 }
 
 function focusMap(lat, lng) {
-  mapFrame.src = "https://google.com" + lat + "," + lng + "&t=k&z=20&output=embed";
+  let d = 0.0008;
+  mapFrame.src = "https://openstreetmap.org" +
+    (lng - d) + "%2C" + (lat - d) + "%2C" + (lng + d) + "%2C" + (lat + d) +
+    "&layer=mapnik&marker=" + lat + "%2C" + lng;
 }
 
 function locateUser() {
@@ -155,10 +158,9 @@ function locateUser() {
 }
 
 function recenterCampus() {
-  mapFrame.src = "https://google.com12.925572,77.579086&t=k&z=19&output=embed";
+  focusMap(12.925572, 77.579086);
   document.getElementById("output").innerHTML = "Map recentered to HNN College of Engineering Campus.";
 }
-
 function showInfo(id) {
   const item = nodes[id];
   document.getElementById("info").innerHTML =
