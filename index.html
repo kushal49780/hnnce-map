@@ -27,8 +27,8 @@
       </label>
 
       <button type="button" onclick="findRoute()">Get Directions</button>
-      <button type="button" style="background:#0f766e; margin-top:6px;" onclick="locateUser()">📍 My Live GPS & Recenter</button>
-      <button type="button" style="background:#64748b; margin-top:6px;" onclick="recenterCampus()">🎯 Recenter Campus Map</button>
+      <button type="button" style="background:#0f766e; margin-top:6px;" onclick="locateUser()">My Live GPS & Recenter</button>
+      <button type="button" style="background:#64748b; margin-top:6px;" onclick="recenterCampus()">Recenter Campus Map</button>
 
       <div id="output" class="result">Select locations above and click <b>Get Directions</b>.</div>
 
@@ -36,16 +36,13 @@
 
       <h3>2. Facility Directory</h3>
       <input type="text" id="search" placeholder="Search CSE lab, library, canteen, ATM..." onkeyup="searchPlace()">
-      <div id="info" class="info">Select or search a facility to view floor & Google Maps pin.</div>
+      <div id="info" class="info">Select or search a facility to view floor & GPS pin.</div>
     </div>
 
-    <!-- Right Interactive Google Map Embed -->
+    <!-- Right Interactive Map Box -->
     <div class="box">
-      <h3>Interactive Campus Map <small>(Zoom, Drag, Satellite & Recenter)</small></h3>
-      <iframe id="gmapFrame"
-        src="about:blank"
-        width="100%" height="540" style="border:1px solid #cbd5e1; border-radius:8px;">
-      </iframe>
+      <h3>Interactive Campus Map <small>(Zoom, Drag & Recenter)</small></h3>
+      <iframe id="gmapFrame" src="about:blank" width="100%" height="540" style="border:1px solid #cbd5e1; border-radius:8px;"></iframe>
     </div>
   </div>
 
