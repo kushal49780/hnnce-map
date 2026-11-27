@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> HNNCE Campus Navigator</title>
+  <title>HNN College of Engineering — Campus Navigator</title>
+  <link rel="stylesheet" href="https://unpkg.com" />
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h2>HNN College of Engineering — Campus Navigator</h2>
-    <p>36B Cross, Jayanagar 7th block, Bengaluru – 560070</p>
+    <p>36B Cross, Jayanagar 7th block, Bengaluru - 560070</p>
   </header>
 
   <div class="layout">
@@ -27,22 +28,26 @@
       </label>
 
       <button type="button" onclick="findRoute()">Get Directions</button>
+      <button type="button" style="background:#0f766e; margin-top:6px;" onclick="locateUser()">📍 My Live GPS & Recenter</button>
+      <button type="button" style="background:#64748b; margin-top:6px;" onclick="recenterCampus()">🎯 Recenter Campus Map</button>
+
       <div id="output" class="result">Select locations above and click <b>Get Directions</b>.</div>
 
       <hr>
 
       <h3>2. Facility Directory</h3>
       <input type="text" id="search" placeholder="Search CSE lab, library, canteen, ATM..." onkeyup="searchPlace()">
-      <div id="info" class="info">Click any blue circle on the map or search above to see floor & GPS details.</div>
+      <div id="info" class="info">Click any pin on the map or search above to see floor & room details.</div>
     </div>
 
-    <!-- Right Interactive Map -->
+    <!-- Right Interactive Real Map -->
     <div class="box">
-      <h3>HNNCE Digital Campus Map <small>(Blue = Facility, Red = Route, Dashed = Stairs)</small></h3>
-      <svg id="map" viewBox="0 0 920 560"></svg>
+      <h3>Interactive Campus Map <small>(Zoom, Drag, or Click Pins)</small></h3>
+      <div id="map" style="width:100%; height:540px; border-radius:8px; border:1px solid #cbd5e1;"></div>
     </div>
   </div>
 
+  <script src="https://unpkg.com"></script>
   <script src="script.js"></script>
 </body>
 </html>
