@@ -151,15 +151,32 @@ function locateUser() {
   }
   navigator.geolocation.getCurrentPosition(
     function(pos) {
-      focusMap(pos.coords.latitude, pos.coords.longitude);
-      document.getElementById("output").innerHTML = "Centered map on your <b>Live GPS Location</b>.";
+      let uLat = pos.coords.latitude;
+      let uLng = pos.coords.longitude;
+      let dest = nodes[endSel.value];
+
+      // Calculate straight-line GPS distance in meters using Haversine formula
+      let R = 6371000;
+      let dLat = (dest.lat - uLat) * Math.PI / 180;
+      let dLng = (dest.lng - uLng) * Math.PI / 180;
+      let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(uLat * Math.PI / 180) * Math.cos(dest.lat * Math.PI / 180) *
+              Math.sin(dLng / 2) * Math.sin(dLng / 2);
+      let dist = Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+
+      let distText = dist >= 1000 ? (dist / 1000).toFixed(2) + " km" : dist + " m";
+      let walkMins = Math.max(1, Math.ceil(dist / 60));
+
+      focusMap(uLat, uLng);
+      document.getElementById("output").innerHTML =
+        "<b>Your Live GPS:</b> " + uLat.toFixed(5) + ", " + uLng.toFixed(5) +
+        "<br><b>Distance to " + dest.name + ":</b> " + distText + " (~" + walkMins + " min walk)";
     },
     function() {
-      alert("Please allow Location access in your browser to center on your live GPS.");
+      alert("Please allow Location access in your browser to calculate live GPS distance.");
     }
   );
 }
-
 function recenterCampus() {
   focusMap(12.925572, 77.579086);
   document.getElementById("output").innerHTML = "Map recentered to HNN College of Engineering Campus.";
